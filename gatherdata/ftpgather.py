@@ -33,7 +33,7 @@ def GatherFilesFTP():
         filesToDownload.append(downloadableFiles)
     #boolean for testing to cut down on time
     
-    isDownloadTime = False
+    isDownloadTime = True
     if isDownloadTime:
         for files in filesToDownload:
             #create a file in the DataFiles folder

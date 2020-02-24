@@ -43,7 +43,7 @@ def newAnimal(animal):
     #tasty animals will be given orgID
     #status, name, species, breed, sex, description
     wantedData = [
-        'orgID','status','name'
+        'orgID','name','status','lastUpdated','species','breed','sex','size','animalLocation',
     ]
 
     animalOutput = {}
@@ -59,7 +59,7 @@ def newOrg(org):
     orgID = org['orgID']
     #array of all of the fields we want to be included in the csv file
     wantedData =[
-        'name','address',
+        'name','address', 'city', 'state', 'zip','country', 'phone', 'email', 'orgurl', 'orgSpecies'
     ]
     orgOutput ={}
     for field in wantedData:
