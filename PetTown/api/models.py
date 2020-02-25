@@ -15,7 +15,7 @@ class Organization(models.Model):
     email = models.CharField(max_length=128)
     orgurl = models.CharField(max_length=128)
     created = models.DateTimeField(auto_now_add=True)
-    def __str__(self)
+    def __str__(self):
         return str(self.name.title())
 
 class Animal(models.Model):
