@@ -8,6 +8,4 @@ router = DefaultRouter()
 router.register('animals', views.AnimalViewSet)
 router.register('organizations',views.OrganizationViewSet)
 
-urlpatterns = {
-    path('', include(router.urls)),
-}
+urlpatterns = router.urls
