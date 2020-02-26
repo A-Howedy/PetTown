@@ -20,5 +20,5 @@ from rest_framework import permissions
 urlpatterns = [
     path('api/', include('api.urls')),
     path('admin/', admin.site.urls),
-	re_path(r'^api-auth/', include('rest_framework.urls')),    
+	re_path(r'^api-auth/', include('rest_framework.urls')),
 ]
