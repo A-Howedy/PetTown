@@ -15,7 +15,7 @@ def GatherFilesFTP():
 
     #=======================
     #putting the apikey in temporarily
-    apikey = "E38aA1uJ"
+    apikey = apikey = "E38aA1uJ"
     user = 'apikey-'+apikey
     password = 'BXWGQW'    
     #=================
@@ -33,7 +33,7 @@ def GatherFilesFTP():
         filesToDownload.append(downloadableFiles)
     #boolean for testing to cut down on time
     
-    isDownloadTime = True
+    isDownloadTime = False
     if isDownloadTime:
         for files in filesToDownload:
             #create a file in the DataFiles folder

@@ -2,21 +2,70 @@
 takes inputs of either an animal object or a organization object and writes the data into a csv file
 '''
 import pathlib
-
+import json
+import requests
 
 openFiles = []
 
-def animal(id, fieldData):    
-    fields = []
-    for keys in fieldData:
-        fields.append(keys)
-    csvFileName = "animals.csv"
-    file = openFile(csvFileName,"animalID",fields)
-    #check to see if there was an error with the file opening
-    if file is None:
-        return
-    WriteDataIntoFile(file, id, fieldData)
-    
+def GetApiKey():
+    '''
+    gets the super secret api key which will be hidden later
+    '''
+    ak = "15d03f4c20fdc0bfd89b59ce9bee762b5a21baad"
+    return ak
+
+
+def PostData(path, data):
+    '''
+    posts the inputted data to the specififed URL with the appropriate headers
+
+    '''
+    ak = GetApiKey()
+    #DO NOT HARD CODE THIS IN!
+    PetTown = 'http://localhost:8000/api'
+    actualURL = PetTown + '/' + path
+    headers = {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': "Token " + ak,
+    }
+    jsonData = json.dumps(data)
+    request = requests.Request('POST', actualURL, data=jsonData, headers=headers)
+    prepared = request.prepare()
+    s = requests.Session()
+    response = s.send(prepared)
+
+    print(response.status_code)
+    print(str(response.text))
+
+
+
+
+def animal(id, fieldData):
+    useCSV = False
+    if useCSV:    
+        fields = []
+        for keys in fieldData:
+            fields.append(keys)
+        csvFileName = "animals.csv"
+        file = openFile(csvFileName,"animalID",fields)
+        #check to see if there was an error with the file opening
+        if file is None:
+            return
+        WriteDataIntoFile(file, id, fieldData)
+    else:
+        #Create some nice JSON data to POST to our api!!!
+        animalData = {
+            'id':id,
+            'orgID':fieldData['orgID'],
+            'name':fieldData['name'],
+            'status':fieldData['status'],
+            'lastUpdated':fieldData['lastUpdated'],
+            'species':fieldData['species'],
+            'breed':fieldData['breed'],
+            'sex':fieldData['sex'],
+            'size':fieldData['size']
+        }
+        PostData('animals/',animalData)
 
 
 
@@ -24,18 +73,37 @@ def organization(id, fieldData):
     '''
     writes a csv file containing the organization data
     '''
-    fields = []
-    for keys in fieldData:
-        fields.append(keys)
+    useCSV = False
+    if useCSV:
+        fields = []
+        for keys in fieldData:
+            fields.append(keys)
 
-    csvFileName = "organizations.csv"
-    file = openFile(csvFileName,"orgID",fields)
+        csvFileName = "organizations.csv"
+        file = openFile(csvFileName,"orgID",fields)
 
-    #check to see if there was an error with the file opening
-    if file is None:
-        return    
+        #check to see if there was an error with the file opening
+        if file is None:
+            return    
 
-    WriteDataIntoFile(file, id, fieldData)
+        WriteDataIntoFile(file, id, fieldData)
+    else:
+        #post some of that data to the tasty api
+       
+        orgData = {
+            'id':id,
+            'name':fieldData['name'],
+            'address':fieldData['address'],
+            'city':fieldData['city'],
+            'state':fieldData['state'],
+            'zip':fieldData['zip'],
+            'country':fieldData['country'],
+            'phone':fieldData['phone'],
+            'email':fieldData['email'],
+            'orgurl':fieldData['orgurl'],
+            #'created':fieldData['created']
+        }
+        PostData('organizations/', orgData)
 
 
 

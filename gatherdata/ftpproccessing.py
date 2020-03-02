@@ -9,7 +9,7 @@ def processFTPDownload(fileName):
     This function proccesses the files downloaded via FTP each file consists of
     a lot of dictionaries each dictionary represents a new animal or organization
     It first finds out which item it is processing (org or animal) and then throws the data
-    to be output 
+    to be output
     Arguement: path to file to process
     '''    
     #open the file and loop through each line, convert each line to a dictionary
@@ -49,7 +49,7 @@ def newAnimal(animal):
     animalOutput = {}
     for field in wantedData:
         animalOutput[field]=animal[field]
-    #print(animalOutput)    
+    #print(animalOutput)
     output.animal(animalID, animalOutput)
 
 def newOrg(org):
@@ -61,7 +61,8 @@ def newOrg(org):
     wantedData =[
         'name','address', 'city', 'state', 'zip','country', 'phone', 'email', 'orgurl',
     ]
-    orgOutput ={}
+    orgOutput ={
+    }
     for field in wantedData:
         orgOutput[field]=org[field]
     #print(orgOutput)
