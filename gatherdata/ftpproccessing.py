@@ -18,7 +18,6 @@ def processFTPDownload(fileName):
     isOrgFile = False
     #check to see which item is being processed
     if 'orgs' in fileName:
-        print("TRUE")
         isOrgFile = True
 
     for line in processFile:

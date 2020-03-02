@@ -6,7 +6,7 @@ import time
 class Organization(models.Model):
     #This data is liable to change with the future uh oh!
 
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, unique = False)
     address = models.CharField(max_length=128,blank = True)
     city = models.CharField(max_length=128,blank = True)
     state = models.CharField(max_length=128,blank = True)

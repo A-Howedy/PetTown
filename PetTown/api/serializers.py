@@ -9,9 +9,6 @@ class AnimalSerializer(serializers.ModelSerializer):
         'sex','size',)
         model = models.Animal
 
-
-
-
 class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:        
         fields = ('id','name','address','city','state','zip','country','phone','email',
