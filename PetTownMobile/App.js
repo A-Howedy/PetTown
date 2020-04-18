@@ -35,9 +35,7 @@ export default function App() {
       onError = {err => console.log(err)}
       ></AppLoading>
     );
-  }
-
-  
+  } 
     
   return (
     <Provider store = {dataStore}>

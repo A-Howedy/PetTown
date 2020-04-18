@@ -8,16 +8,19 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import {Ionicons} from '@expo/vector-icons'
 import {HeaderButtons, HeaderButton, Item} from "react-navigation-header-buttons";
 import colors from "../Constants/colors"
+//screens
 import HomeScreen from '../screens/HomeScreen';
 import AnimalDescriptionScreen from '../screens/AnimalDescriptionScreen';
 import OrganizationDescriptionScreen from '../screens/OrganizationDescriptionScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
-
+import AboutScreen from '../screens/About';
+//navigation stack
 const HomeStack = createStackNavigator();
 const FavoriteStack = createStackNavigator();
-
 const Organization = createStackNavigator();
 const Animal = createStackNavigator();
+const About = createStackNavigator();
+//drawer
 const Drawer = createDrawerNavigator();
 
 const CustomHeaderButton = (props) => (
@@ -25,9 +28,10 @@ const CustomHeaderButton = (props) => (
       {...props}
       IconComponent={Ionicons}
       iconSize={25}
-      color={Platform.OS === "android" ? "white" : "white"}
+      color={Platform.OS === "android" ? colors.headerTextColor : "white"}
     />
   );
+
 const HeaderMenuButton = (props) => { 
     return (
         <HeaderButtons HeaderButtonComponent = {CustomHeaderButton}>
@@ -44,13 +48,13 @@ const HeaderMenuButton = (props) => {
 
 const defaultStackNavOptions = {    
             headerStyle:{
-                backgroundColor: Platform.OS === "android" ? colors.headerAccentColor: colors.headerAccentColor
+                backgroundColor: Platform.OS === "android" ? colors.headerAccentColor: "white"
             },
             headerTitleStyle: {
                 fontSize: 28,
                 fontFamily: "quicksand-bold",
             },
-            headerTintColor: Platform.OS === "android" ? "white" : colors.headerTextColor,
+            headerTintColor: Platform.OS === "android" ?  colors.headerTextColor : "white",
             headerTitle: "PetTown",           
 };
 
@@ -71,7 +75,13 @@ const HomeStackNavigator = () => {
 
 const OrganizationDescriptionNavigator = () => {
     return (
-        <Organization.Navigator screenOptions= {defaultStackNavOptions}>
+        <Organization.Navigator screenOptions= {defaultStackNavOptions}
+            screenOptions={({ navigation, route }) => ({
+                ...defaultStackNavOptions,
+                headerRight: () => (
+                <HeaderMenuButton navigation={navigation} route={route} />
+                ),
+            })}>
             <Organization.Screen name = "Organization List" component={OrganizationDescriptionScreen}/>
             <Organization.Screen name = "Home" component={HomeScreen}/>
         </Organization.Navigator>
@@ -79,7 +89,13 @@ const OrganizationDescriptionNavigator = () => {
 }
 const AnimalDescriptionNavigator = () => {
     return (
-        <Animal.Navigator>
+        <Animal.Navigator
+            screenOptions={({ navigation, route }) => ({
+                ...defaultStackNavOptions,
+                headerRight: () => (
+                <HeaderMenuButton navigation={navigation} route={route} />
+                ),
+            })}>
             <Animal.Screen name = "Animal List" component={AnimalDescriptionScreen}/>
             <Animal.Screen name = "Home" component={HomeScreen}/>
         </Animal.Navigator>
@@ -99,6 +115,20 @@ const FavoriteStackNavigator = () => {
         </FavoriteStack.Navigator>
     )
 }
+const AboutStackNavigator = () =>{
+    return (
+        <About.Navigator 
+            screenOptions={({ navigation, route }) => ({
+            ...defaultStackNavOptions,
+            headerRight: () => (
+              <HeaderMenuButton navigation={navigation} route={route} />
+            ),
+          })}>
+              <About.Screen name = "About" component={AboutScreen}/>
+        </About.Navigator>
+    )
+}
+
 
 const PetTownNavigator = () => {
     return (
@@ -109,6 +139,7 @@ const PetTownNavigator = () => {
                 <Drawer.Screen name = "Animal List" component = {AnimalDescriptionNavigator}/>
                 <Drawer.Screen name = "Organization List" component = {OrganizationDescriptionNavigator}/>
                 <Drawer.Screen name = "Favorites" component = {FavoriteStackNavigator}/>
+                <Drawer.Screen name = "About" component= {AboutStackNavigator}/>
             </Drawer.Navigator>
 
         </NavigationContainer>
