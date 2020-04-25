@@ -35,9 +35,7 @@ def PostData(path, data):
     response = s.send(prepared)
 
     print(response.status_code)
-    print(str(response.text))
-
-
+    print(str(response))
 
 
 def animal(id, fieldData):
@@ -52,6 +50,7 @@ def animal(id, fieldData):
         if file is None:
             return
         WriteDataIntoFile(file, id, fieldData)
+
     else:
         #Create some nice JSON data to POST to our api!!!
         animalData = {
@@ -92,6 +91,7 @@ def organization(id, fieldData):
        
         orgData = {
             'id':id,
+            'orgID':id,
             'name':fieldData['name'],
             'address':fieldData['address'],
             'city':fieldData['city'],
@@ -103,6 +103,7 @@ def organization(id, fieldData):
             'orgurl':fieldData['orgurl'],
             #'created':fieldData['created']
         }
+        print(orgData)
         PostData('organizations/', orgData)
 
 

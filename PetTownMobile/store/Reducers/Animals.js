@@ -1,8 +1,8 @@
-import { Animals } from '../../data/data';
+import { animals } from '../../data/animaldatafordummy';
 
 const initialState = {
-    allAnimals: Animals,
-    favoriteAnimals: Animals.filter(fav => fav.favorite == true)
+    allAnimals: animals,
+    favoriteAnimals: animals.filter(fav => fav.favorite == true)
 };
 
 export default (state = initialState, action) => {

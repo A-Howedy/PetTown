@@ -1,22 +1,32 @@
 import React from 'react';
-import {StyleSheet, View, Text, FlatList} from 'react-native';
+import {StyleSheet, View, Text, FlatList, TouchableOpacity} from 'react-native';
 import { useSelector } from 'react-redux';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 //import data
 
 
 
 const HomeScreen = props =>{
-    const Animals = useSelector(state => state.Animals.allAnimals);
+    //import animal list from the passed in reducer
+    const Animals = useSelector(state => state.animals.allAnimals);
     
     const renderItemHandler = itemData=>{
         return(
+            //take the extracted item and display a discounted version to the user, i.e name and
+            //species
             <View style={styles.listItem}>
-                <Text>Here is our lucky animal for today! {itemData.item.name}</Text>
+                <TouchableOpacity onPress={() =>{}} useForeground>>
+                <Text style={listItemItem}>Here is our lucky animal for today! {itemData.item.name}</Text>
+                <Text style={listItemItem}>They are a {itemData.item.species}</Text>
+                </TouchableOpacity>
+
             </View>
         );
     }
     return(<View style={styles.screen}>
-        <FlatList
+        <FlatList style={styles.list}
+        //extract the id and render it to the screen
         keyExtractor={(item, index) => item.id.toString()} 
         data={Animals}
         renderItem={renderItemHandler}
@@ -31,8 +41,22 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
     },
+    list:{
+        wdith="100%",
+        padding:10,
+    },
     listItem:{
-        margin:5,
+        shadowColor: Colors.primaryColor,
+        shadowOffset:{width:0,height:2},
+        shadowRadius:6,
+        shadowOpacity:0.25,
+        elevation:5,
+        borderRadius:10,
+        backgroundColor:"white",
+        marginVertical:5,
+        width='100%'
+    },
+    listItemItem:{
         padding:10,
     }
 

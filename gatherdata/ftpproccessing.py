@@ -56,6 +56,7 @@ def newOrg(org):
     Create new org!
     '''
     orgID = org['orgID']
+    #print(orgID)
     #array of all of the fields we want to be included in the csv file
     wantedData =[
         'name','address', 'city', 'state', 'zip','country', 'phone', 'email', 'orgurl',

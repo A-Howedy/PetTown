@@ -63,11 +63,10 @@ def GatherFilesFTP():
     #close out the ftp connection    
     rgFTP.quit()
     #get all the files recently downloaded
+
     filesToGoThrough = os.listdir(path)
     ftpproccessing.processFTPDownload(path+filesToGoThrough[1])
-
     for files in os.listdir(path): 
         #Because of the one csv file we need to check extensions
         if(files.endswith('.json') and 'pet' in files):
-            print(files)
             ftpproccessing.processFTPDownload(path+files)

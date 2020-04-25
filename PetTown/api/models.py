@@ -5,7 +5,7 @@ import time
 #it is time to create the models!
 class Organization(models.Model):
     #This data is liable to change with the future uh oh!
-
+    orgID = models.CharField(max_length=128, unique = False, blank = True)
     name = models.CharField(max_length=128, unique = False)
     address = models.CharField(max_length=128,blank = True)
     city = models.CharField(max_length=128,blank = True)

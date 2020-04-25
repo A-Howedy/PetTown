@@ -11,7 +11,7 @@ class AnimalSerializer(serializers.ModelSerializer):
 
 class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:        
-        fields = ('id','name','address','city','state','zip','country','phone','email',
+        fields = ('id','orgID','name','address','city','state','zip','country','phone','email',
         'orgurl','created')
         
         model = models.Organization
