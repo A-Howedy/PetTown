@@ -11,7 +11,7 @@ def GetApiKey():
     '''
     gets the super secret api key which will be hidden later
     '''
-    ak = "15d03f4c20fdc0bfd89b59ce9bee762b5a21baad"
+    ak = "8f7a4a68e9154253a2f8ee5718ff741894556890"
     return ak
 
 
@@ -22,12 +22,13 @@ def PostData(path, data):
     '''
     ak = GetApiKey()
     #DO NOT HARD CODE THIS IN!
-    PetTown = 'http://localhost:8000/api'
+    PetTown = 'http://ec2-3-87-101-51.compute-1.amazonaws.com:8000/api'
     actualURL = PetTown + '/' + path
     headers = {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': "Token " + ak,
     }
+    print(data)
     jsonData = json.dumps(data)
     request = requests.Request('POST', actualURL, data=jsonData, headers=headers)
     prepared = request.prepare()

@@ -14,7 +14,7 @@ const AnimalDescriptionScreen = props =>{
     }
 
     const foundAnimal = useSelector((state) => state.Animals.allAnimals.find((animal) => animal.id == animalID));
-    console.log(foundAnimal);
+    
     return (
         <View>
             <Text style={styles.description}>

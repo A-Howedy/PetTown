@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useEffect, useCallback} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity} from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-
+import * as animalActions from "../store/Actions/animals"
 //import data
 
 
 
 const HomeScreen = props =>{
     //import animal list from the passed in reducer
-    const Animals = useSelector(state => state.Animals.allAnimals);
+    const Animals = useSelector((state) => state.Animals.allAnimals);
+    const dispatch = useDispatch();
     
+    const loadAnimals = useCallback(async () => {
+        try{
+            await dispatch(animalActions.getAnimals());
+        }
+        catch (e){
+
+        }
+        
+    },[dispatch]
+    );
+
+    useEffect(() => {
+        loadAnimals();
+    },[dispatch]);
+
+
     const findAnimal = (id) => {
         //console.log(id)
         props.navigation.navigate("Animal Details",{id : id});

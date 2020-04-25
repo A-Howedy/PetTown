@@ -25,7 +25,7 @@ SECRET_KEY = '*%^vueap-p7mm)g9g10@6ct5j(blqu(!_10b)33p7%h$rqzptm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-3-87-101-51.compute-1.amazonaws.com','localhost']
+ALLOWED_HOSTS = ['ec2-3-87-101-51.compute-1.amazonaws.com','localhost','127.0.0.1','*']
 
 
 # Application definition

@@ -1,4 +1,5 @@
 import { animals } from '../../data/animaldatafordummy';
+import {FETCH_ANIMALS} from '../Actions/animals';
 
 const initialState = {
     allAnimals: animals,
@@ -6,5 +7,11 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+    switch(action.type){
+        case FETCH_ANIMALS:
+            return {
+                allAnimals: action.allAnimals
+            };
+    }
     return state;
 }
