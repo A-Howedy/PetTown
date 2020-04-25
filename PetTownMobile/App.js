@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {AppLoading} from "expo";
 import * as Font from 'expo-font';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import Rthunky from 'redux-thunk';
 import animalsReducers from './store/Reducers/Animals'
 //screens
 import PetTownNavigator from './Components/PetTownNavigator';
@@ -13,7 +14,9 @@ import OrganizationDescriptionScreen from './screens/OrganizationDescriptionScre
 const rootReducer = combineReducers({
   Animals: animalsReducers
 });
-const dataStore = createStore(rootReducer);
+
+//apply the redux thunk middleware for asynch loading
+const dataStore = createStore(rootReducer, applyMiddleware(Rthunky));
 
 const getData = () =>{
   return Font.loadAsync({

@@ -9,21 +9,25 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const HomeScreen = props =>{
     //import animal list from the passed in reducer
-    const Animals = useSelector(state => state.animals.allAnimals);
+    const Animals = useSelector(state => state.Animals.allAnimals);
     
-    const renderItemHandler = itemData=>{
+    const findAnimal = (id) => {
+        //console.log(id)
+        props.navigation.navigate("Animal Details",{id : id});
+    };
+
+    const renderItemHandler = ({item}) =>{
         return(
             //take the extracted item and display a discounted version to the user, i.e name and
             //species
             <View style={styles.listItem}>
-                <TouchableOpacity onPress={() =>{}} useForeground>>
-                <Text style={listItemItem}>Here is our lucky animal for today! {itemData.item.name}</Text>
-                <Text style={listItemItem}>They are a {itemData.item.species}</Text>
+                <TouchableOpacity onPress = {() => {findAnimal(item.id)}} useForeground>
+                <Text style={styles.listItemItem}>Here is our lucky animal for today! {item.id}</Text>
                 </TouchableOpacity>
-
             </View>
         );
-    }
+    };
+
     return(<View style={styles.screen}>
         <FlatList style={styles.list}
         //extract the id and render it to the screen
@@ -42,7 +46,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
     },
     list:{
-        wdith="100%",
+        width: '100%',
         padding:10,
     },
     listItem:{
@@ -54,11 +58,11 @@ const styles = StyleSheet.create({
         borderRadius:10,
         backgroundColor:"white",
         marginVertical:5,
-        width='100%'
+        width: '100%'
     },
     listItemItem:{
         padding:10,
-    }
+    },
 
 });
 export default HomeScreen;
