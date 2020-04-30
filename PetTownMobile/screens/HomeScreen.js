@@ -1,5 +1,8 @@
-import React, { useEffect, useCallback} from 'react';
-import {StyleSheet, View, Text, FlatList, TouchableOpacity} from 'react-native';
+import React, { useEffect, useCallback, useState} from 'react';
+import {StyleSheet, View, Text, FlatList, TouchableOpacity,
+    SafeAreaView,
+    RefreshControl,} from 'react-native';
+import Constants from 'expo-constants';
 import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import * as animalActions from "../store/Actions/animals"
@@ -8,18 +11,20 @@ import * as animalActions from "../store/Actions/animals"
 
 
 const HomeScreen = props =>{
+    const [isLoading, setIsLoading] = useState(false);
     //import animal list from the passed in reducer
     const Animals = useSelector((state) => state.Animals.allAnimals);
     const dispatch = useDispatch();
     
     const loadAnimals = useCallback(async () => {
+        setIsLoading(true);
         try{
             await dispatch(animalActions.getAnimals());
         }
         catch (e){
 
         }
-        
+        setIsLoading(false);
     },[dispatch]
     );
 
@@ -39,21 +44,22 @@ const HomeScreen = props =>{
             //species
             <View style={styles.listItem}>
                 <TouchableOpacity onPress = {() => {findAnimal(item.id)}} useForeground>
-                <Text style={styles.listItemItem}>Here is our lucky animal for today! {item.id}</Text>
+                <Text style={styles.listItemItem}>Here is our lucky animal for today! {item.name}</Text>
                 </TouchableOpacity>
             </View>
         );
     };
 
-    return(<View style={styles.screen}>
+    return(<SafeAreaView style={styles.screen}>
         <FlatList style={styles.list}
-        //extract the id and render it to the screen
+        refreshControl={<RefreshControl refreshing={isLoading} onRefresh={loadAnimals}/>}
+
         keyExtractor={(item, index) => item.id.toString()} 
         data={Animals}
         renderItem={renderItemHandler}
 
         />
-        </View>);
+        </SafeAreaView>);
 }
 
 const styles = StyleSheet.create({

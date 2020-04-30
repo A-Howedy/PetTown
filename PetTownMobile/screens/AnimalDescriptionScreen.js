@@ -18,7 +18,11 @@ const AnimalDescriptionScreen = props =>{
     return (
         <View>
             <Text style={styles.description}>
-                {foundAnimal.name}
+                {foundAnimal.name}{"\n"}
+                {foundAnimal.status}{"\n"}
+                {foundAnimal.species}{"\n"}
+                {foundAnimal.sex}{"\n"}
+                cool!
             </Text>
         </View>
     )

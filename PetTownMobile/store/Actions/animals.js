@@ -7,9 +7,9 @@ export const getAnimals = () => {
     //get some animals
     return async (dispatch, getState) => {
         //fetch is a react function
-        const resp = await fetch('ec2-3-87-101-51.compute-1.amazonaws.com/api/animals/',{
+        const resp = await fetch('http://ec2-3-87-101-51.compute-1.amazonaws.com:8000/api/animals/',{
             method:'GET', headers:{
-                "Authorization": "Token 15d03f4c20fdc0bfd89b59ce9bee762b5a21baad",
+                "Authorization": "Token 8f7a4a68e9154253a2f8ee5718ff741894556890",
                 "Content-Type": "application/json",
             },
         });
