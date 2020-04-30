@@ -6,6 +6,7 @@ import Constants from 'expo-constants';
 import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import * as animalActions from "../store/Actions/animals"
+import * as orgActions from "../store/Actions/organizations"
 //import data
 
 
@@ -14,12 +15,14 @@ const HomeScreen = props =>{
     const [isLoading, setIsLoading] = useState(false);
     //import animal list from the passed in reducer
     const Animals = useSelector((state) => state.Animals.allAnimals);
+    const Orgs = useSelector((state)=> state.Orgs.allOrgs);
     const dispatch = useDispatch();
     
     const loadAnimals = useCallback(async () => {
         setIsLoading(true);
         try{
             await dispatch(animalActions.getAnimals());
+            await dispatch(orgActions.getOrgs());
         }
         catch (e){
 
@@ -34,7 +37,6 @@ const HomeScreen = props =>{
 
 
     const findAnimal = (id) => {
-        console.log(id)
         props.navigation.navigate("Animal Details",{id : id});
     };
 
