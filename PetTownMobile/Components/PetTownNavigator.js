@@ -69,39 +69,12 @@ const HomeStackNavigator = () => {
           })}>
             <HomeStack.Screen name = "Home" component={HomeScreen}/>
             <HomeStack.Screen name = "Animal Details" component={AnimalDescriptionScreen}/>
+            <HomeStack.Screen name = "Organization Details" component={OrganizationDescriptionScreen}/>
         </HomeStack.Navigator>
     )
 }
-//need to change these file names and add a detail screen
 
-const OrganizationDescriptionNavigator = () => {
-    return (
-        <Organization.Navigator screenOptions= {defaultStackNavOptions}
-            screenOptions={({ navigation, route }) => ({
-                ...defaultStackNavOptions,
-                headerRight: () => (
-                <HeaderMenuButton navigation={navigation} route={route} />
-                ),
-            })}>
-            <Organization.Screen name = "Organization List" component={OrganizationDescriptionScreen}/>
-            <Organization.Screen name = "Home" component={HomeScreen}/>
-        </Organization.Navigator>
-    )
-}
-const AnimalDescriptionNavigator = () => {
-    return (
-        <Animal.Navigator
-            screenOptions={({ navigation, route }) => ({
-                ...defaultStackNavOptions,
-                headerRight: () => (
-                <HeaderMenuButton navigation={navigation} route={route} />
-                ),
-            })}>
-            <Animal.Screen name = "Animal List" component={AnimalDescriptionScreen}/>
-            <Animal.Screen name = "Home" component={HomeScreen}/>
-        </Animal.Navigator>
-    )
-}
+//favorites screen stack
 const FavoriteStackNavigator = () => {
     return (
         <FavoriteStack.Navigator 
@@ -116,6 +89,7 @@ const FavoriteStackNavigator = () => {
         </FavoriteStack.Navigator>
     )
 }
+//the about screen stack
 const AboutStackNavigator = () =>{
     return (
         <About.Navigator 
@@ -137,8 +111,6 @@ const PetTownNavigator = () => {
 
             <Drawer.Navigator initialRouteName="Home" drawerPosition='right'>
                 <Drawer.Screen name = "Home" component = {HomeStackNavigator}/>                
-                <Drawer.Screen name = "Animal List" component = {AnimalDescriptionNavigator}/>
-                <Drawer.Screen name = "Organization List" component = {OrganizationDescriptionNavigator}/>
                 <Drawer.Screen name = "Favorites" component = {FavoriteStackNavigator}/>
                 <Drawer.Screen name = "About" component= {AboutStackNavigator}/>
             </Drawer.Navigator>

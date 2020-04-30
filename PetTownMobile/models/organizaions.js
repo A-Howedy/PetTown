@@ -1,4 +1,3 @@
-import { animals } from "../data/animaldatafordummy";
 
 //an animal model!!
 class organization{
@@ -19,4 +18,4 @@ class organization{
     }
 };
 
-export default animal;
+export default organization;

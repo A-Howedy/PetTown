@@ -6,13 +6,15 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import Rthunky from 'redux-thunk';
 import animalsReducers from './store/Reducers/Animals'
+import organizationReducer from './store/Reducers/Organizations'
 //screens
 import PetTownNavigator from './Components/PetTownNavigator';
 import AnimalDescriptionScreen from './screens/AnimalDescriptionScreen';
 import OrganizationDescriptionScreen from './screens/OrganizationDescriptionScreen';
 
 const rootReducer = combineReducers({
-  Animals: animalsReducers
+  Animals: animalsReducers,
+  Orgs: organizationReducer
 });
 
 //apply the redux thunk middleware for asynch loading

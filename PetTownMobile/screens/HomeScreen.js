@@ -34,7 +34,7 @@ const HomeScreen = props =>{
 
 
     const findAnimal = (id) => {
-        //console.log(id)
+        console.log(id)
         props.navigation.navigate("Animal Details",{id : id});
     };
 
@@ -57,7 +57,6 @@ const HomeScreen = props =>{
         keyExtractor={(item, index) => item.id.toString()} 
         data={Animals}
         renderItem={renderItemHandler}
-
         />
         </SafeAreaView>);
 }
@@ -65,8 +64,9 @@ const HomeScreen = props =>{
 const styles = StyleSheet.create({
     screen:{
         flex:1,
-        alignItems:'center',
-        justifyContent:'center',
+        flexDirection:'row',
+        flexWrap:'wrap',
+        alignItems:'flex-start',
     },
     list:{
         width: '100%',
