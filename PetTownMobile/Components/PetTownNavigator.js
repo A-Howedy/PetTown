@@ -13,12 +13,12 @@ import HomeScreen from '../screens/HomeScreen';
 import AnimalDescriptionScreen from '../screens/AnimalDescriptionScreen';
 import OrganizationDescriptionScreen from '../screens/OrganizationDescriptionScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import SearchScreen from '../screens/Search';
 import AboutScreen from '../screens/About';
 //navigation stack
 const HomeStack = createStackNavigator();
 const FavoriteStack = createStackNavigator();
-const Organization = createStackNavigator();
-const Animal = createStackNavigator();
+const SearchStack = createStackNavigator();
 const About = createStackNavigator();
 //drawer
 const Drawer = createDrawerNavigator();
@@ -73,6 +73,21 @@ const HomeStackNavigator = () => {
         </HomeStack.Navigator>
     )
 }
+//favorites screen stack
+const SearchStackNavigator = () => {
+    return (
+        <SearchStack.Navigator 
+        screenOptions={({ navigation, route }) => ({
+            ...defaultStackNavOptions,
+            headerRight: () => (
+              <HeaderMenuButton navigation={navigation} route={route} />
+            ),
+          })}>
+            <SearchStack.Screen name = "Favorites" component={SearchScreen}/>
+
+        </SearchStack.Navigator>
+    )
+}
 
 //favorites screen stack
 const FavoriteStackNavigator = () => {
@@ -110,7 +125,8 @@ const PetTownNavigator = () => {
         <NavigationContainer>
 
             <Drawer.Navigator initialRouteName="Home" drawerPosition='right'>
-                <Drawer.Screen name = "Home" component = {HomeStackNavigator}/>                
+                <Drawer.Screen name = "Home" component = {HomeStackNavigator}/>
+                <Drawer.Screen name = "Search" component = {SearchStackNavigator}/>                
                 <Drawer.Screen name = "Favorites" component = {FavoriteStackNavigator}/>
                 <Drawer.Screen name = "About" component= {AboutStackNavigator}/>
             </Drawer.Navigator>
