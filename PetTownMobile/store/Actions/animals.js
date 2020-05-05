@@ -1,7 +1,7 @@
 //create some actions for the reducer!
 export const FETCH_ANIMALS = "FETCH_ANIMALS";
-
 import animal from "../../models/animals";
+const loadedAnimals = [];
 
 export const getAnimals = () => {
     //get some animals
@@ -19,7 +19,6 @@ export const getAnimals = () => {
         }
         const apiResponse = await resp.json();
         //store these animals aa
-        const loadedAnimals = [];
         for (const keys in apiResponse){
             loadedAnimals.push(new animal(
                 apiResponse[keys].id,

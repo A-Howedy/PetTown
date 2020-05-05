@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import Colors from '../Constants/colors';
+
 //initially this filter option will be blank
 //it will be updated whenever the user selects a category to search for
 
@@ -15,18 +16,22 @@ class Example extends Component {
         super(props);
         this.onChangeText = this.onChangeCategory.bind(this);
         this.state = {
-            filters:[{value:'hello'}],
+            filters:[{value:''}],
         };
     }
 
+    test=(t)=>{console.log(t)};
     onChangeCategory(text){
         //change the data displayed in the second dropdown
         switch(text){
             case 'Animal':
-                console.log("animal");
+                this.props.catCallBack("Animal"); 
+                this.setState({
+                    filters:AnimalFilters
+                });
             break;
             case 'Organization':
-                console.log("organization");
+                this.props.catCallBack("Org");
                 this.setState({
                     filters:OrganizationFilters
                 });
@@ -55,8 +60,8 @@ class Example extends Component {
             <View style={{width:250, marginLeft:8}}>
             <Dropdown
                     label='Filter'
-                    data={Filters}
-                    onChangeText={this.onChangeText}
+                    data={Filters}                    
+                    onChangeText={(text)=>{this.props.filterCallBack(text)}}
                 />  
             </View>
         </View>
@@ -65,11 +70,15 @@ class Example extends Component {
   }
 }
 const OrganizationFilters = [
-    {value: 'Name'},
+    {value:'Name'},
     {value:'City'},
     {value:'State'},
     {value:'ZipCode'},
 ];
+const AnimalFilters = [
+    {value:'Name'},
+    {value:'Species'},
+]
 const Category = [
     {value: 'Animal'},
     {value:'Organization'}

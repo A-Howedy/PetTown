@@ -30,7 +30,6 @@ const HomeScreen = props =>{
         setIsLoading(false);
     },[dispatch]
     );
-
     useEffect(() => {
         loadAnimals();
     },[dispatch]);
@@ -55,9 +54,11 @@ const HomeScreen = props =>{
     return(<SafeAreaView style={styles.screen}>
         <FlatList style={styles.list}
         refreshControl={<RefreshControl refreshing={isLoading} onRefresh={loadAnimals}/>}
-
+        initialNumToRender={300}
         keyExtractor={(item, index) => item.id.toString()} 
         data={Animals}
+        windowSize={10}
+        numColumns={2}
         renderItem={renderItemHandler}
         />
         </SafeAreaView>);
@@ -82,8 +83,8 @@ const styles = StyleSheet.create({
         elevation:5,
         borderRadius:10,
         backgroundColor:"white",
-        marginVertical:5,
-        width: '100%'
+        marginVertical:5,  
+        width: '50%'
     },
     listItemItem:{
         padding:10,
