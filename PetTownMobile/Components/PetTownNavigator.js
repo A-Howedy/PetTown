@@ -12,12 +12,10 @@ import colors from "../Constants/colors"
 import HomeScreen from '../screens/HomeScreen';
 import AnimalDescriptionScreen from '../screens/AnimalDescriptionScreen';
 import OrganizationDescriptionScreen from '../screens/OrganizationDescriptionScreen';
-import FavoritesScreen from '../screens/FavoritesScreen';
 import SearchScreen from '../screens/Search';
 import AboutScreen from '../screens/About';
 //navigation stack
 const HomeStack = createStackNavigator();
-const FavoriteStack = createStackNavigator();
 const SearchStack = createStackNavigator();
 const About = createStackNavigator();
 //drawer
@@ -28,7 +26,7 @@ const CustomHeaderButton = (props) => (
       {...props}
       IconComponent={Ionicons}
       iconSize={25}
-      color={Platform.OS === "android" ? colors.headerTextColor : "white"}
+      color={Platform.OS === "android" ? colors.primaryColor : "white"}
     />
   );
 
@@ -54,7 +52,7 @@ const defaultStackNavOptions = {
                 fontSize: 28,
                 fontFamily: "quicksand-bold",
             },
-            headerTintColor: Platform.OS === "android" ?  colors.headerTextColor : "white",
+            headerTintColor: Platform.OS === "android" ?  colors.primaryColor : "white",
             headerTitle: "PetTown",           
 };
 
@@ -83,25 +81,11 @@ const SearchStackNavigator = () => {
               <HeaderMenuButton navigation={navigation} route={route} />
             ),
           })}>
-            <SearchStack.Screen name = "Favorites" component={SearchScreen}/>
+            <SearchStack.Screen name = "Search" component={SearchScreen}/>
+            <SearchStack.Screen name = "Animal Details" component={AnimalDescriptionScreen}/>
+            <SearchStack.Screen name = "Organization Details" component={OrganizationDescriptionScreen}/>
 
         </SearchStack.Navigator>
-    )
-}
-
-//favorites screen stack
-const FavoriteStackNavigator = () => {
-    return (
-        <FavoriteStack.Navigator 
-        screenOptions={({ navigation, route }) => ({
-            ...defaultStackNavOptions,
-            headerRight: () => (
-              <HeaderMenuButton navigation={navigation} route={route} />
-            ),
-          })}>
-            <FavoriteStack.Screen name = "Favorites" component={FavoritesScreen}/>
-
-        </FavoriteStack.Navigator>
     )
 }
 //the about screen stack
@@ -126,8 +110,7 @@ const PetTownNavigator = () => {
 
             <Drawer.Navigator initialRouteName="Home" drawerPosition='right'>
                 <Drawer.Screen name = "Home" component = {HomeStackNavigator}/>
-                <Drawer.Screen name = "Search" component = {SearchStackNavigator}/>                
-                <Drawer.Screen name = "Favorites" component = {FavoriteStackNavigator}/>
+                <Drawer.Screen name = "Search" component = {SearchStackNavigator}/>
                 <Drawer.Screen name = "About" component= {AboutStackNavigator}/>
             </Drawer.Navigator>
 

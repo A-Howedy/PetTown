@@ -9,16 +9,19 @@ import {
     Button,
     SafeAreaView,
     FlatList,
-    RefreshControl,
+    TouchableOpacity,
+    Image,
 } from 'react-native';
 import SearchHeader from 'react-native-search-header';
 const searchSuggestions =['pet1'];
 //use this function to dispatch the search to redux
 //parents the component for the dropdown menu so we can pass the query through to it
+import Colors from '../Constants/colors'
 import DropDown from '../Components/dropdownmenu'
 import { useSelector, useDispatch, } from 'react-redux';
 
-const searchH = props =>{
+const searchH = (props) =>{
+    let currentC = "Animal";
     const animals = useSelector((state)=>state.Animals.allAnimals)
     const orgs = useSelector((state)=>state.Orgs.allOrgs)
     const [query, updateQ] = useState("");
@@ -30,14 +33,30 @@ const searchH = props =>{
     }
     const updateSFilter=(f)=>{updateF(f.toLowerCase());}
     const searchHandler=(event)=>{
-        //update query
+        //update parameters
+        currentC = category;
         updateQ(event.nativeEvent.text.toLowerCase());
     }
     const renderItemHandler = ({item}) =>{        
         //take the extracted item and display a discounted version to the user, i.e name and species
+        let pic = require('../assets/missing.png');
+        if(item.species=='Dog'){
+            pic=require('../assets/dog.jpg');
+        }else if(item.species=='Cat'){
+            pic= require('../assets/cat.jpg');
+        }
         return(
         <View style={styles.listItem}>
-            <Text style={styles.listItemItem}>Here is our lucky animal for today! {item.name}</Text>
+            <TouchableOpacity 
+                style={{flex:1/2, aspectRatio:1}}>
+                <Image style={{flex:1, alignSelf:'center'}}
+                resizeMode='contain' source={pic}/>
+                <Text style={styles.listItemItem}>
+                    {item.name}{'\n'}
+                    {item.species}{'\n'}
+                    {item.status}
+                    </Text>
+            </TouchableOpacity>
         </View>
         )
 }
@@ -93,7 +112,10 @@ const searchH = props =>{
                 initialNumToRender={50}
                 keyExtractor={(item, index) => item.id.toString()} 
                 data={list}
-                extraData={true}
+                extraData={true}                
+                windowSize={10}
+                numColumns={2}
+                removeClippedSubviews={true}
                 renderItem={renderItemHandler}
                 />
             </SafeAreaView>
@@ -113,11 +135,27 @@ const styles = StyleSheet.create(
         dropDown:{
             flex:2,
         },
-        buttons:{
-            width:100,
-            height:40,
-            borderRadius:2,
-            backgroundColor:`#ff5722`
-        }
+        list:{
+            backgroundColor:Colors.background,
+
+            width: '100%',
+            padding:10,
+        },
+        listItem:{
+            shadowColor: Colors.primaryColor,
+            shadowOffset:{width:0,height:2},
+            shadowRadius:6,
+            shadowOpacity:0.25,
+            elevation:5,
+            borderRadius:10,
+            backgroundColor:"white",
+            marginVertical:8,
+            marginHorizontal:4,
+            width: '48%'
+        },
+        listItemItem:{
+            fontFamily:'quicksand',
+            padding:10,
+        },
     })
 export default searchH;

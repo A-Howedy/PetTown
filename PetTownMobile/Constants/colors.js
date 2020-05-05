@@ -4,6 +4,7 @@ const tan = "#E7E3D4";
 const blue = "#3B8BEB"
 
 export default {
-    headerTextColor: blue,
-    headerAccentColor: lightblue
+    primaryColor: blue,
+    headerAccentColor: lightblue,
+    background: tan,
 }
